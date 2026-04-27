@@ -1,0 +1,92 @@
+.controlContainer {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 500px;
+  width: 100%;
+}
+
+.title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.modeBadge {
+  padding: 0.6rem 2rem;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.modeAuto {
+  background-color: rgba(59, 130, 246, 0.15);
+  color: var(--accent-color);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.modeOn {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: var(--success-color);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.modeOff {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: var(--danger-color);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+:global(.dark) .modeAuto { background-color: rgba(88, 166, 255, 0.2); border-color: rgba(88, 166, 255, 0.4); }
+:global(.dark) .modeOn { background-color: rgba(35, 134, 54, 0.2); border-color: rgba(35, 134, 54, 0.4); }
+:global(.dark) .modeOff { background-color: rgba(218, 54, 51, 0.2); border-color: rgba(218, 54, 51, 0.4); }
+
+.button {
+  background: var(--card-border);
+  color: #fff;
+  border: none;
+  padding: 1.2rem 3rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 320px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.button:active {
+  transform: translateY(2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.buttonOn {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+
+.buttonOff {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+}
+
+.buttonAuto {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+}
+
+:global(.dark) .buttonOn { background: linear-gradient(135deg, #2ea043, #238636); }
+:global(.dark) .buttonOff { background: linear-gradient(135deg, #da3633, #b62324); }
+:global(.dark) .buttonAuto { background: linear-gradient(135deg, #58a6ff, #3182ce); }
