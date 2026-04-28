@@ -19,6 +19,7 @@ interface SensorData {
 
 export default function Home() {
   const [data, setData] = useState<SensorData | null>(null);
+  const [controlWebMode, setControlWebMode] = useState<'AUTO' | 'ON' | 'OFF'>('AUTO');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { theme, setTheme } = useTheme();
@@ -44,23 +45,32 @@ export default function Home() {
       setLoading(false);
     });
 
-    return () => unsubscribe();
+    const controlRef = ref(database, 'block_monitoring_system/control/web_mode');
+    const unsubscribeControl = onValue(controlRef, (snapshot) => {
+      const val = snapshot.val();
+      if (val) {
+        setControlWebMode(val);
+      }
+    });
+
+    return () => {
+      unsubscribe();
+      unsubscribeControl();
+    };
   }, []);
 
   const handleToggleMode = () => {
-    if (!data) return;
-
     let nextMode: 'AUTO' | 'ON' | 'OFF' = 'AUTO';
     
-    if (data.web_mode === 'AUTO') {
+    if (controlWebMode === 'AUTO') {
       nextMode = 'ON';
-    } else if (data.web_mode === 'ON') {
+    } else if (controlWebMode === 'ON') {
       nextMode = 'OFF';
-    } else if (data.web_mode === 'OFF') {
+    } else if (controlWebMode === 'OFF') {
       nextMode = 'AUTO';
     }
 
-    const webModeRef = ref(database, 'block_monitoring_system/data/web_mode');
+    const webModeRef = ref(database, 'block_monitoring_system/control/web_mode');
     set(webModeRef, nextMode).catch(err => {
       console.error("Failed to update web_mode", err);
       alert("Failed to update mode.");
@@ -136,7 +146,8 @@ export default function Home() {
 
             <div className={styles.controlSection}>
               <PumpControl 
-                webMode={data.web_mode} 
+                webMode={controlWebMode} 
+                currentMode={data.web_mode}
                 onToggleMode={handleToggleMode} 
               />
             </div>

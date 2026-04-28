@@ -3,12 +3,13 @@ import styles from './PumpControl.module.css';
 
 interface PumpControlProps {
   webMode: 'AUTO' | 'ON' | 'OFF';
+  currentMode: 'AUTO' | 'ON' | 'OFF';
   onToggleMode: () => void;
 }
 
-export default function PumpControl({ webMode, onToggleMode }: PumpControlProps) {
+export default function PumpControl({ webMode, currentMode, onToggleMode }: PumpControlProps) {
   const getBadgeClass = () => {
-    switch (webMode) {
+    switch (currentMode) {
       case 'ON': return styles.modeOn;
       case 'OFF': return styles.modeOff;
       default: return styles.modeAuto;
@@ -38,7 +39,7 @@ export default function PumpControl({ webMode, onToggleMode }: PumpControlProps)
       <h2 className={styles.title}>Pump Control Override</h2>
       
       <div className={`${styles.modeBadge} ${getBadgeClass()}`}>
-        Current Mode: {webMode}
+        Current Mode: {currentMode}
       </div>
 
       <button 
