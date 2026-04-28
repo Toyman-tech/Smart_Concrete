@@ -45,7 +45,7 @@ export default function Home() {
       setLoading(false);
     });
 
-    const controlRef = ref(database, 'block_monitoring_system/control/web_mode');
+    const controlRef = ref(database, 'block_monitoring_system/control/web_pump');
     const unsubscribeControl = onValue(controlRef, (snapshot) => {
       const val = snapshot.val();
       if (val) {
@@ -70,9 +70,9 @@ export default function Home() {
       nextMode = 'AUTO';
     }
 
-    const webModeRef = ref(database, 'block_monitoring_system/control/web_mode');
+    const webModeRef = ref(database, 'block_monitoring_system/control/web_pump');
     set(webModeRef, nextMode).catch(err => {
-      console.error("Failed to update web_mode", err);
+      console.error("Failed to update web_pump", err);
       alert("Failed to update mode.");
     });
   };
